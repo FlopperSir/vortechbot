@@ -31,10 +31,10 @@ const mongoose = require('mongoose');
 // Configuración de la conexión a la base de datos
 const username = 'ucrfabianvindas';
 const password = 'u649Mj774gQI5xqW';
-const dbName = 'Cluster0'; // Reemplaza con el nombre de tu base de datos
+const dbName = 'Vortech'; // Reemplaza con el nombre de tu base de datos
 
 // URL de conexión de MongoDB
-const url = `mongodb+srv://${username}:${password}@cluster0.wzwbjra.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${username}:${password}@Vortech.wzwbjra.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 // Conexión a la base de datos
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -99,7 +99,7 @@ client.once('ready', async () => {
         }
     })();
 
-    await setPresence(client, `CleanBan`, { type: ActivityType.Playing, status: 'online' });
+    await setPresence(client, `Vortech`, { type: ActivityType.Playing, status: 'online' });
 });
 
 client.on('interactionCreate', async interaction => {
@@ -169,10 +169,10 @@ client.on('interactionCreate', async interaction => {
             return interaction.reply({
                 embeds: [
                     new EmbedBuilder()
-                    .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in CleanBan and unlock more features.`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
                         .setColor(Colors.Red)
-                        .setFooter({ text: "CleanBan" })
+                        .setFooter({ text: "Vortech" })
                         .setTimestamp()
                 ],
                 ephemeral: false
@@ -190,7 +190,7 @@ client.on('interactionCreate', async interaction => {
                         .setAuthor({ name: "Interaction was unsuccessful." })
                         .setColor(Colors.Red)
                         .setTimestamp()
-                        .setFooter({ text: "CleanBan.com", iconURL: client.user.displayAvatarURL() })
+                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
                 ],
                 ephemeral: false
             });
@@ -204,10 +204,10 @@ client.on('interactionCreate', async interaction => {
             return interaction.reply({
                 embeds: [
                     new EmbedBuilder()
-                    .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in CleanBan and unlock more features.`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
                         .setColor(Colors.Red)
-                        .setFooter({ text: "CleanBan" })
+                        .setFooter({ text: "Vortech" })
                         .setTimestamp()
                 ],
                 ephemeral: false
@@ -225,7 +225,7 @@ client.on('interactionCreate', async interaction => {
                         .setAuthor({ name: "Interaction was unsuccessful." })
                         .setColor(Colors.Red)
                         .setTimestamp()
-                        .setFooter({ text: "CleanBan.com", iconURL: client.user.displayAvatarURL() })
+                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
                 ],
                 ephemeral: false
             });
@@ -239,10 +239,10 @@ client.on('interactionCreate', async interaction => {
             return interaction.reply({
                 embeds: [
                     new EmbedBuilder()
-                    .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in CleanBan and unlock more features.`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
                         .setColor(Colors.Red)
-                        .setFooter({ text: "CleanBan" })
+                        .setFooter({ text: "Vortech" })
                         .setTimestamp()
                 ],
                 ephemeral: false
@@ -260,7 +260,7 @@ client.on('interactionCreate', async interaction => {
                         .setAuthor({ name: "Interaction was unsuccessful." })
                         .setColor(Colors.Red)
                         .setTimestamp()
-                        .setFooter({ text: "CleanBan.com", iconURL: client.user.displayAvatarURL() })
+                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
                 ],
                 ephemeral: false
             });
@@ -274,10 +274,10 @@ client.on('interactionCreate', async interaction => {
             return interaction.reply({
                 embeds: [
                     new EmbedBuilder()
-                    .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in CleanBan and unlock more features.`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
                         .setColor(Colors.Red)
-                        .setFooter({ text: "CleanBan" })
+                        .setFooter({ text: "Vortech" })
                         .setTimestamp()
                 ],
                 ephemeral: false
@@ -295,7 +295,7 @@ client.on('interactionCreate', async interaction => {
                         .setAuthor({ name: "Interaction was unsuccessful." })
                         .setColor(Colors.Red)
                         .setTimestamp()
-                        .setFooter({ text: "CleanBan.com", iconURL: client.user.displayAvatarURL() })
+                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
                 ],
                 ephemeral: false
             });
@@ -310,10 +310,10 @@ client.on('interactionCreate', async interaction => {
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                    .setDescription(`You need the role \`${permsRole}\`, rank up in CleanBan and unlock more features.`)
+                .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                    .setDescription(`You need the role \`${permsRole}\`, rank up in Vortech and unlock more features.`)
                     .setColor(Colors.Red)
-                    .setFooter({ text: "CleanBan" })
+                    .setFooter({ text: "Vortech" })
                     .setTimestamp()
             ],
             ephemeral: false
@@ -353,7 +353,7 @@ client.on('interactionCreate', async interaction => {
                     .setAuthor({ name: "Interaction was unsuccessful." })
                     .setColor(Colors.Red)
                     .setTimestamp()
-                    .setFooter({ text: "CleanBan.com", iconURL: client.user.displayAvatarURL() })
+                    .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
             ],
             ephemeral: false
         });

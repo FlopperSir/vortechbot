@@ -6,7 +6,7 @@ const mongoose = require('../../index.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("add-spoofer-key")
-        .setDescription("Generates a new CleanBan Spoofer Key")
+        .setDescription("Generates a new Vortech Spoofer Key")
         .addUserOption(option =>
             option.setName('customer')
                 .setDescription('Customer name')
@@ -36,8 +36,49 @@ module.exports = {
             // Obtener todas las llaves disponibles (no utilizadas)
             const availableLicenses = await License.find({ used: false }, 'key');
 
+            if (availableLicenses.length <= 20) {
+                const warningChannelId = '1245870396650164235'; // ID del canal para enviar el mensaje de advertencia
+
+                const warningChannel = interaction.client.channels.cache.get(warningChannelId);
+
+                if (warningChannel) {
+                    try {
+                        const rolePing = '@everyone'; // Mencionar al rol específico
+                        const warningMessage = new EmbedBuilder()
+                            .setTitle('***Warning: Low License Key Supply ``VORTECH``***')
+                            .setDescription(`There are only ${availableLicenses.length} license keys left. @everyone`)
+                            .setColor(Colors.Orange)
+                            .setFooter({ text: "Vortech & Flopper" })
+                            .setTimestamp();
+
+                        warningChannel.send({ embeds: [warningMessage] })
+                            .then(async () => {
+                                console.log('Mensaje de advertencia enviado al canal exitosamente.');
+
+                                // Enviar el mensaje a los DMs de 3 personas específicas
+                                const user1 = await interaction.client.users.fetch('');
+                                const user2 = await interaction.client.users.fetch('');
+                                const user3 = await interaction.client.users.fetch('');
+
+                                if (user1 && user2 && user3) {
+                                    user1.send({ embeds: [warningMessage] });
+                                    user2.send({ embeds: [warningMessage] });
+                                    user3.send({ embeds: [warningMessage] });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al enviar mensaje de advertencia al canal:', error);
+                            });
+                    } catch (error) {
+                        console.error('Error al intentar enviar mensaje de advertencia al canal:', error);
+                    }
+                } else {
+                    console.error('No se pudo encontrar el canal de advertencia especificado.');
+                }
+            }
+
             if (availableLicenses.length === 0) {
-                return interaction.reply({ content: 'No more license keys available, inform Flopper to restock. ❤️', ephemeral: false });
+                return interaction.reply({ content: 'Bot currently down. ❤️', ephemeral: false });
             }
 
             // Elegir una licencia aleatoria de las disponibles
@@ -55,35 +96,31 @@ module.exports = {
                 staff: staffName, // Usar el nombre del personal obtenido
                 usedAt: new Date()
             });
-            const channelId = '1242293583613264024'; // Reemplazar con el ID del canal al que deseas enviar el mensaje
+
+            const channelId = '1245705423722647572'; // Reemplazar con el ID del canal al que deseas enviar el mensaje
 
             // Obtener el objeto del canal utilizando el ID
             const channel = interaction.client.channels.cache.get(channelId);
-            
+
             if (channel) {
-                if (channel) {
-                    try {
-                        const embedMessage = new EmbedBuilder()
-                            .setTitle('***SPOOFER KEY ACTIVATED***')
-                            .setDescription(`**CUSTOMER:** ${customerName}\n**STAFF:** ${staffName}\n**KEY:** \`${license.key}\``)
-                            .setColor(Colors.Green)
-                            .setFooter({ text: "CleanBan & Flopper" })
-                            .setTimestamp()
-    
-                
-                        // Enviar el mensaje con el embed
-                        channel.send({ embeds: [embedMessage] })
-                            .then(() => {
-                                console.log('Mensaje enviado al canal exitosamente.');
-                            })
-                            .catch(error => {
-                                console.error('Error al enviar mensaje al canal:', error);
-                            });
-                    } catch (error) {
-                        console.error('Error al intentar enviar mensaje al canal:', error);
-                    }
-                } else {
-                    console.error('No se pudo encontrar el canal especificado.');
+                try {
+                    const embedMessage = new EmbedBuilder()
+                        .setTitle('***SPOOFER KEY ACTIVATED***')
+                        .setDescription(`**CUSTOMER:** ${customerName}\n**STAFF:** ${staffName}\n**KEY:** \`${license.key}\``)
+                        .setColor(Colors.DarkPurple)
+                        .setFooter({ text: "Vortech & Flopper" })
+                        .setTimestamp();
+
+                    // Enviar el mensaje con el embed
+                    channel.send({ embeds: [embedMessage] })
+                        .then(() => {
+                            console.log('Mensaje enviado al canal exitosamente.');
+                        })
+                        .catch(error => {
+                            console.error('Error al enviar mensaje al canal:', error);
+                        });
+                } catch (error) {
+                    console.error('Error al intentar enviar mensaje al canal:', error);
                 }
             } else {
                 console.error('No se pudo encontrar el canal especificado.');
@@ -91,13 +128,12 @@ module.exports = {
 
             // Construir el mensaje de respuesta con la licencia generada
             const embedMessage = new EmbedBuilder()
-                .setTitle('***CleanBan Spoofer key has been activated.***')
-                .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
+                .setTitle('***Vortech Spoofer key has been activated.***')
+                .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
                 .setDescription(`Here is your license:\n\`\`\`${license.key}\`\`\``)
-                .setColor(Colors.Green)
-                .setFooter({ text: "CleanBan & Flopper" })
-                .setTimestamp()
-                
+                .setColor(Colors.DarkPurple)
+                .setFooter({ text: "Vortech & Flopper" })
+                .setTimestamp();
 
             // Enviar el mensaje con el embed
             interaction.reply({ embeds: [embedMessage], ephemeral: false });

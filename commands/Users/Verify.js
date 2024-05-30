@@ -6,10 +6,10 @@ const mongoose = require('../../index.js');
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("verify-spoofer-key")
-    .setDescription("Verify a CleanBan Spoofer Key")
+    .setDescription("Verify a Vortech Spoofer Key")
         .addStringOption(option =>
             option.setName('license_key')
-                .setDescription('The CleanBan Spoofer Key to verify')
+                .setDescription('The Vortech Spoofer Key to verify')
                 .setRequired(true)),
 
                 async execute(interaction) {
@@ -24,8 +24,8 @@ module.exports = {
                                 .setTitle('***Spoofer Key Verification***')
                                 .setDescription(`This key is invalid or has not yet been used:\n\nkey: \`${licenseKey}\``)
                                 .setColor(Colors.Red)
-                                .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                                .setFooter({ text: "CleanBan & Flopper" })
+                                .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                                .setFooter({ text: "Vortech & Flopper" })
                                 .setTimestamp();
                             return interaction.reply({ embeds: [embedMessage] });
                         } else {
@@ -42,9 +42,9 @@ module.exports = {
                             const embedMessage = new EmbedBuilder()
                                 .setTitle('***Spoofer Key Verification***')
                                 .setDescription(`This license key has already been used:\n\nCustomer: ${usedLicenseInfo.customer}\nkey: \`${license.key}\``)
-                                .setColor(Colors.Green)
-                                .setThumbnail("https://media.discordapp.net/attachments/1075134714886770763/1241558470394773504/CLEAN_BAN_1.png?ex=664aa2ee&is=6649516e&hm=c704c3172af1b6f200eaac8035445f0998e485c0b58dbc7f2443d49d4c5b861f&=&format=webp&quality=lossless")
-                                .setFooter({ text: "CleanBan & Flopper" })
+                                .setColor(Colors.DarkPurple)
+                                .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                                .setFooter({ text: "Vortech & Flopper" })
                                 .setTimestamp();
                 
                             // Enviar el mensaje con el embed
