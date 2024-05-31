@@ -105,7 +105,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                     .setTitle("Step 2: CB-Loader")
                     .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                    .setDescription(`1. [Download CB-Loader](https://dosya.co/bmqn35ux2u49/Vortech.exe.html)\n2. Right-click and select "Run as administrator.\n3. Enter your license key.\n4. Start Spof.\n5. Allow the application to complete its process.\n6. Restart Your PC.\n7. Once your PC has restarted, run the Serialchecker file. Capture a screenshot of the output. `)
+                    .setDescription(`1. [Download CB-Loader](https://dosya.co/bmqn35ux2u49/cleanban.exe.html)\n2. Right-click and select "Run as administrator.\n3. Enter your license key.\n4. Start Spof.\n5. Allow the application to complete its process.\n6. Restart Your PC.\n7. Once your PC has restarted, run the Serialchecker file. Capture a screenshot of the output. `)
                         .setColor(Colors.DarkPurple)
                         .setFooter({ text: "Vortech & Flopper" })
                         .setTimestamp();

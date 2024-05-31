@@ -43,7 +43,6 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 module.exports = mongoose;
 
-
 const commands = [];
 const clientCommands = new Collection();
 
@@ -102,216 +101,14 @@ client.once('ready', async () => {
     await setPresence(client, `Vortech`, { type: ActivityType.Playing, status: 'online' });
 });
 
-client.on('interactionCreate', async interaction => {
-    if (interaction.isButton()) {
-        if (interaction.customId.startsWith("selectapp_")) {
-            const id = interaction.customId.split("_")[1];
-            const idFromGuild = interaction.guild ? interaction.guild.id : interaction.user.id;
-            const applications = await db.get(`applications_${idFromGuild}`) || [];
-
-            if (applications.length === 0) {
-                return interaction.editReply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setDescription("No applications have been added yet.")
-                            .setColor(Colors.Red)
-                            .setTimestamp()
-                    ],
-                    ephemeral: false
-                });
-            }
-
-            const selectedApp = applications.find(app => app.id === id);
-
-            if (!selectedApp) {
-                return interaction.editReply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setDescription("The selected application does not exist.")
-                            .setColor(Colors.Red)
-                            .setTimestamp()
-                    ],
-                    ephemeral: false
-                });
-            }
-
-            db.get(`token_${idFromGuild}`);
-            db.set(`token_${idFromGuild}`, selectedApp.sellerkey);
-
-            return interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setDescription(`The application \`${selectedApp.application}\` has been selected.`)
-                        .setColor(Colors.Green)
-                        .setTimestamp()
-                ],
-                ephemeral: false
-            });
-        }
-
-        return false;
-    }
-
-    if (!interaction.isCommand()) return;
-
-    const command = clientCommands.get(interaction.commandName);
-
-    if (!command) return;
-
-    const idfrom = interaction.guild ? interaction.guild.id : interaction.user.id;
-    const ephemeral = !interaction.guild;
-
-    // Excluyendo el comando "TEST" de la verificación del rol
-    if (interaction.commandName === "steps") {
-        const testRole = "Staff"; // Nombre del rol que se requiere para ejecutar el comando "test"
-
-        if (interaction.member && !interaction.member.roles.cache.some(role => role.name === testRole)) {
-            return interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
-                        .setColor(Colors.Red)
-                        .setFooter({ text: "Vortech" })
-                        .setTimestamp()
-                ],
-                ephemeral: false
-            });
-        }
-        
-
-        try {
-            await command.execute(interaction);
-        } catch (err) {
-            console.error(err);
-            await interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setAuthor({ name: "Interaction was unsuccessful." })
-                        .setColor(Colors.Red)
-                        .setTimestamp()
-                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
-                ],
-                ephemeral: false
-            });
-        }
-        return;
-    }
-    if (interaction.commandName === "add-spoofer-key") {
-        const testRole = "perms"; // Nombre del rol que se requiere para ejecutar el comando "test"
-
-        if (interaction.member && !interaction.member.roles.cache.some(role => role.name === testRole)) {
-            return interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
-                        .setColor(Colors.Red)
-                        .setFooter({ text: "Vortech" })
-                        .setTimestamp()
-                ],
-                ephemeral: false
-            });
-        }
-        
-
-        try {
-            await command.execute(interaction);
-        } catch (err) {
-            console.error(err);
-            await interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setAuthor({ name: "Interaction was unsuccessful." })
-                        .setColor(Colors.Red)
-                        .setTimestamp()
-                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
-                ],
-                ephemeral: false
-            });
-        }
-        return;
-    }
-    if (interaction.commandName === "verify-spoofer-key") {
-        const testRole = "Staff"; // Nombre del rol que se requiere para ejecutar el comando "test"
-
-        if (interaction.member && !interaction.member.roles.cache.some(role => role.name === testRole)) {
-            return interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
-                        .setColor(Colors.Red)
-                        .setFooter({ text: "Vortech" })
-                        .setTimestamp()
-                ],
-                ephemeral: false
-            });
-        }
-        
-
-        try {
-            await command.execute(interaction);
-        } catch (err) {
-            console.error(err);
-            await interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setAuthor({ name: "Interaction was unsuccessful." })
-                        .setColor(Colors.Red)
-                        .setTimestamp()
-                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
-                ],
-                ephemeral: false
-            });
-        }
-        return;
-    }
-    if (interaction.commandName === "verify-license") {
-        const testRole = "Staff"; // Nombre del rol que se requiere para ejecutar el comando "test"
-
-        if (interaction.member && !interaction.member.roles.cache.some(role => role.name === testRole)) {
-            return interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                        .setDescription(`You need the role \`${testRole}\`, rank up in Vortech and unlock more features.`)
-                        .setColor(Colors.Red)
-                        .setFooter({ text: "Vortech" })
-                        .setTimestamp()
-                ],
-                ephemeral: false
-            });
-        }
-        
-
-        try {
-            await command.execute(interaction);
-        } catch (err) {
-            console.error(err);
-            await interaction.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setAuthor({ name: "Interaction was unsuccessful." })
-                        .setColor(Colors.Red)
-                        .setTimestamp()
-                        .setFooter({ text: "Vortech.com", iconURL: client.user.displayAvatarURL() })
-                ],
-                ephemeral: false
-            });
-        }
-        return;
-    }
-    
-    // Verificación del rol "perms" antes de ejecutar cualquier otro comando
-    const permsRole = "perms"; // Nombre del rol que tiene permisos
-
-    if (interaction.member && !interaction.member.roles.cache.some(role => role.name === permsRole)) {
+// Función para verificar el rol requerido antes de ejecutar un comando
+async function checkRoleAndExecute(interaction, command, requiredRole) {
+    if (interaction.member && !interaction.member.roles.cache.some(role => role.name === requiredRole)) {
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
-                    .setDescription(`You need the role \`${permsRole}\`, rank up in Vortech and unlock more features.`)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/1245559420314845195/1245832018323832832/ud.png?ex=665a2efb&is=6658dd7b&hm=d9b66e6cf8fb8ee96a61d87ef1e81caccd951c4ac4a837e258c0d5db0bb439b6&")
+                    .setDescription(`You need the role \`${requiredRole}\`, rank up in Vortech and unlock more features.`)
                     .setColor(Colors.Red)
                     .setFooter({ text: "Vortech" })
                     .setTimestamp()
@@ -320,34 +117,11 @@ client.on('interactionCreate', async interaction => {
         });
     }
 
-    await interaction.deferReply({ ephemeral: false });
-
-    let content = `**${interaction.user.username}${interaction.user.discriminator ? ("#" + interaction.user.discriminator) : ''} (ID: ${interaction.user.id})** executed the command \`/${interaction.commandName}\`\n`;
-
-    for (const option of interaction.options._hoistedOptions) {
-        content += `\n${option.name} : ${option.value}`;
-    }
-
-    let wh_url = await db.get(`wh_url_${idfrom}`)
-    if (wh_url != null) {
-        var params = {
-            content: content
-        }
-        fetch(wh_url, {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(params)
-        })
-    }
-
     try {
         await command.execute(interaction);
     } catch (err) {
         console.error(err);
-
-        await interaction.editReply({
+        await interaction.reply({
             embeds: [
                 new EmbedBuilder()
                     .setAuthor({ name: "Interaction was unsuccessful." })
@@ -357,6 +131,48 @@ client.on('interactionCreate', async interaction => {
             ],
             ephemeral: false
         });
+    }
+}
+
+// Aquí se maneja la interacción
+client.on('interactionCreate', async interaction => {
+    if (interaction.isButton()) {
+        // Código para botones...
+    } else if (interaction.isCommand()) {
+        const command = clientCommands.get(interaction.commandName);
+        if (!command) return;
+
+        const idfrom = interaction.guild ? interaction.guild.id : interaction.user.id;
+        const ephemeral = !interaction.guild;
+
+        // Verificación del rol requerido para diferentes comandos
+        switch (interaction.commandName) {
+            case "steps":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "add-spoofer-key":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "verify-spoofer-key":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "add-myth":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "add-tpm":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "verify-license":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            case "add-color":
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+            default:
+                // Verificación del rol "Admin" antes de ejecutar cualquier otro comando
+                await checkRoleAndExecute(interaction, command, "Admin");
+                break;
+        }
     }
 });
 

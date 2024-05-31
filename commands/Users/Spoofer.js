@@ -36,17 +36,51 @@ module.exports = {
             // Obtener todas las llaves disponibles (no utilizadas)
             const availableLicenses = await License.find({ used: false }, 'key');
 
-            if (availableLicenses.length <= 20) {
+            if (availableLicenses.length <= 25) {
+                const warningChannelId = '1245870396650164235'; // ID del canal para enviar el mensaje de advertencia
+                
+                const warningChannel = interaction.client.channels.cache.get(warningChannelId);
+                
+                if (warningChannel) {
+                    try {
+                        const warningMessage = `***Warning: Low License Key Supply VORTECH***\nThere are only ${availableLicenses.length} license keys left. @everyone\n\nVortech & Flopper`;
+                        
+                        warningChannel.send(warningMessage)
+                            .then(async () => {
+                                console.log('Mensaje de advertencia enviado al canal exitosamente.');
+                                
+                                // Enviar el mensaje a los DMs de 3 personas específicas
+                                const user1 = await interaction.client.users.fetch(''); // ID de usuario 1
+                                const user2 = await interaction.client.users.fetch(''); // ID de usuario 2
+                                const user3 = await interaction.client.users.fetch(''); // ID de usuario 3
+                                
+                                if (user1 && user2 && user3) {
+                                    user1.send(warningMessage);
+                                    user2.send(warningMessage);
+                                    user3.send(warningMessage);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error al enviar mensaje de advertencia al canal:', error);
+                            });
+                    } catch (error) {
+                        console.error('Error al intentar enviar mensaje de advertencia al canal:', error);
+                    }
+                } else {
+                    console.error('No se pudo encontrar el canal de advertencia especificado.');
+                }
+            }
+            
+            if (availableLicenses.length <= 100) {
                 const warningChannelId = '1245870396650164235'; // ID del canal para enviar el mensaje de advertencia
 
                 const warningChannel = interaction.client.channels.cache.get(warningChannelId);
 
                 if (warningChannel) {
                     try {
-                        const rolePing = '@everyone'; // Mencionar al rol específico
                         const warningMessage = new EmbedBuilder()
-                            .setTitle('***Warning: Low License Key Supply ``VORTECH``***')
-                            .setDescription(`There are only ${availableLicenses.length} license keys left. @everyone`)
+                            .setTitle('***Key Supply ``VORTECH``***')
+                            .setDescription(`There are only ${availableLicenses.length} license keys left`)
                             .setColor(Colors.Orange)
                             .setFooter({ text: "Vortech & Flopper" })
                             .setTimestamp();
