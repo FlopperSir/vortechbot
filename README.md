@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # KeyAuth-Discord-Bot-Source **2024**
 Source Code of Discord bot for https://keyauth.cc, Also if this bot doesn't work for you use https://github.com/KeyAuth/KeyAuth-Discord-Bot/tree/53a395e024834edcba56fe651ac031f4762e903f it is old bot.
 
@@ -65,3 +66,6 @@ Looking for a Discord bot made by the KeyAuth & RestoreCord founder that you can
 =======
 Flopper KeyAuth and commands BOT.
 >>>>>>> 84d9018e91cd4000e794ca97ed2bfc620eff4779
+=======
+vortech
+>>>>>>> ed804ed43dd29b6ea57c7bb494e2ca653a79bd36
